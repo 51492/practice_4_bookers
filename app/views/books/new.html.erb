@@ -1,7 +1,62 @@
+<!--<h1>Books</h1>-->
+
+<!--  <table>-->
+
+<!--    <thead>-->
+
+<!--      <tr>-->
+<!--        <th>title</th>-->
+<!--        <th>body</th>-->
+<!--        <th></th>-->
+<!--      </tr>-->
+
+<!--    </thead>-->
+
+<!--    <tbody>-->
+      <!--＜% @books.each do |p| %＞-->
+      <!--  ＜tr＞-->
+      <!--    ＜td＞ ＜%= p.title %＞ ＜/td＞-->
+      <!--    ＜td＞ ＜%= p.body %＞ ＜/td＞-->
+      <!--    ＜td＞-->
+      <!--      ＜%= link_to "show", book_path(book.id) %＞-->
+      <!--      ＜%= link_to "edit", edit_book_path(book.id) %＞-->
+      <!--      ＜%= link_to "destroy", destroy_book_path(book.id), method: :delete, "data-confirm" =＞ "Are you sure?" %＞-->
+      <!--    ＜/td＞-->
+      <!--＜/tr＞-->
+      <!--＜% end %＞-->
+<!--    </tbody>-->
+
+<!--  </table>-->
 <h1>Books</h1>
 
+  <table> <!--表を作る-->
 
+    <thead> <!--表のヘッダー部をグループ化-->
 
+      <tr> <!--先頭行-->
+        <th>title</th>
+        <th>body</th>
+        <th></th>
+      </tr>
+
+    </thead>
+
+    <tbody> <!--表のボディ部をグループ化-->
+
+      <% @books.each do |book| %>
+        <tr>
+          <td> <%= book.title %> </td>
+          <td> <%= book.body %> </td>
+          <td>
+            <%= link_to "Show", book_path(book.id) %>
+            <%= link_to "Edit", edit_book_path(book.id) %>
+            <%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %>
+          </td>
+      </tr>
+      <% end %>
+    </tbody>
+
+  </table>
 
 
 <h2>New book</h2>
