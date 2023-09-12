@@ -1,0 +1,32 @@
+<h1>Books</h1>
+
+
+
+
+
+<h2>New book</h2>
+<%= form_with model: @book do |f| %>
+
+<div class ="field">
+  <label for="book_title">Title</label> <!--ラベルをクリックしてフォームがアクティブ化するためにラベル要素を使用-->
+  <%= f.text_field :title %>            <!--タイトル投稿フォーム (id属性は自動設定で「モデル名_カラム名」になる)-->
+</div>
+
+<div class ="field">
+  <label>Body               <!--ラベルをクリックしてフォームがアクティブ化するためにラベル要素を使用-->
+  <%= f.text_area :body %> <!--内容投稿フォーム (id属性は自動設定で「モデル名_カラム名」になる)-->
+  </label>                  <!--titleのフィールドと違う書き方でも同じ挙動？-->
+</div>
+
+<div>
+  <%= f.submit "Create Book" %> <!--投稿ボタン-->
+</div>
+
+
+
+<% end %>
+
+<!--以下参考-->
+<!--HTML】labelタグにfor属性を付けるべき理由とは？使い方まで徹底解説！-->
+　<!--https://style.potepan.com/articles/20037.html-->
+
