@@ -1,25 +1,30 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
 <h1>Books</h1>
 
-  <table>
+  <table> <!--表を作る-->
 
-    <thead>
+    <thead> <!--表のヘッダー部をグループ化-->
 
-      <tr>
+      <tr> <!--先頭行-->
         <th>title</th>
         <th>body</th>
-        <th></th>
+        <th></th> <!--右端の行はヘッダー無記載の為th要素内は無記載-->
       </tr>
 
     </thead>
 
-    <tbody>
-      <% @books.each do |book| %>
+    <tbody> <!--表のボディ部をグループ化-->
+
+      <% @books.each do |book| %> <!--コントローラでbook.allを入れてインスタンス化した@booksにeachメソッドを実行-->
         <tr>
-          <td> <%= book.title %> </td>
-          <td> <%= book.body %> </td>
+          <td> <%= book.title %> </td> <!--eachの変数bookからtitleメソッドでタイトルを取得-->
+          <td> <%= book.body %> </td>  <!--eachの変数bookからbodyメソッドでボディを取得-->
           <td>
-            <%= link_to "Show", book_path(book.id) %>
-            <%= link_to "Edit", edit_book_path(book.id) %>
+            <%= link_to "Show", book_path(book.id) %>      <!--文字列Showにリンクを設定、リンク先はeachの変数bookからidを取得しパス表記-->
+            <%= link_to "Edit", edit_book_path(book.id) %> <!--文字列Editにリンクを設定、リンク先はeachの変数bookからidを取得しパス表記-->
             <%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %>
           </td>
       </tr>
@@ -27,3 +32,34 @@
     </tbody>
 
   </table>
+
+<!--バリデーションによるエラーメッセージ-->
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this book from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<!--投稿フォーム-->
+<h2>New book</h2>
+<%= form_with model: @book do |f| %>
+
+<div class ="field">
+  <label for="book_title">Title</label> <!--ラベルをクリックしてフォームがアクティブ化するためにラベル要素を使用-->
+  <%= f.text_field :title %>            <!--タイトル投稿フォーム (id属性は.text_fieldの自動設定で「モデル名_カラム名」になる)-->
+</div>
+
+<div class ="field">
+  <label>Body               <!--ラベルをクリックしてフォームがアクティブ化するためにラベル要素を使用-->
+  <%= f.text_area :body %>  <!--内容投稿フォーム (id属性は.text_fieldの自動設定で「モデル名_カラム名」になる)-->
+  </label>                  <!--titleのフィールドと違う書き方でも同じ挙動？-->
+</div>
+
+<div>
+  <%= f.submit "Create Book" %> <!--投稿ボタン-->
+</div>
+
+<% end %>
